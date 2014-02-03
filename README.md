@@ -1,27 +1,26 @@
-# SoundCloud PHP API Wrapper [![Build Status](https://travis-ci.org/internalsystemerror/php-soundcloud.png?branch=master)](https://travis-ci.org/internalsystemerror/php-soundcloud)
+# SoundCloud PHP API Wrapper
 
 ## Introduction
 
 A wrapper for the SoundCloud API written in PHP with support for authentication using [OAuth 2.0](http://oauth.net/2/).
 
-The current version was written with [Composer](http://getcomposer.org/) in mind and can be easily distributed as a composer package.
+The wrapper got a real overhaul with version 2.0. The current version was written with [PEAR](http://pear.php.net/) in mind and can easily by distributed as a PEAR package.
 
 ## Requirements
 
-* PHP >= 5.3 (with [cURL](http://se2.php.net/curl) support)
+* PHP >= 5.0.0 (with [cURL](http://se2.php.net/curl) support)
 
 ## Getting started
 
 Check out the [getting started](https://github.com/mptre/php-soundcloud/wiki/OAuth-2) wiki entry for further reference on how to get started. Also make sure to check out the [demo application](https://github.com/mptre/ci-soundcloud) for some example code.
 
-## Installation
+## Composer
 
- 1.  Require php-soundcloud in your project's composer.json:
+There's an unofficial [mirror](https://github.com/internalsystemerror/php-soundcloud) of this project with [Composer](http://getcomposer.org/) support. To install just run the following command from your project root:
 
-```sh
-composer require ise/php-soundcloud 3.*
+```bash
+$ composer require ise/php-soundcloud 3.*
 ```
-
 
 ## Examples
 
@@ -35,7 +34,7 @@ Ofcourse you need to handle the authentication first before being able to reques
 <?php
 try {
     $response = json_decode($soundcloud->get('me'), true);
-} catch (\Soundcloud\Exception\InvalidHttpResponseCodeException $e) {
+} catch (Services_Soundcloud_Invalid_Http_Response_Code_Exception $e) {
     exit($e->getMessage());
 }
 ```
@@ -59,7 +58,7 @@ try {
         ),
         true
     );
-} catch (\Soundcloud\Exception\InvalidHttpResponseCodeException $e) {
+} catch (Services_Soundcloud_Invalid_Http_Response_Code_Exception $e) {
     exit($e->getMessage());
 }
 ```
@@ -83,7 +82,7 @@ try {
         ),
         true
     );
-} catch (\Soundcloud\Exception\InvalidHttpResponseCodeException $e) {
+} catch (Services_Soundcloud_Invalid_Http_Response_Code_Exception $e) {
     exit($e->getMessage());
 }
 ```
@@ -94,7 +93,7 @@ try {
 <?php
 try {
     $response = json_decode($soundcloud->delete('tracks/1'), true);
-} catch (\Soundcloud\Exception\InvalidHttpResponseCodeException $e) {
+} catch (Services_Soundcloud_Invalid_Http_Response_Code_Exception $e) {
     exit($e->getMessage());
 }
 ```
@@ -108,10 +107,10 @@ $track = array(
     'track[tags]' => 'dubstep rofl',
     'track[asset_data]' => '@/absolute/path/to/track.mp3'
 );
-
+    
 try {
     $response = $soundcloud->post('tracks', $track);
-} catch (\Soundcloud\Exception\InvalidHttpResponseCodeException $e) {
+} catch (Services_Soundcloud_Invalid_Http_Response_Code_Exception $e) {
     exit($e->getMessage());
 }
 ```
@@ -122,7 +121,7 @@ try {
 <?php
 try {
     $track = $soundcloud->download(1337);
-} catch (\Soundcloud\Exception\InvalidHttpResponseCodeException $e) {
+} catch (Services_Soundcloud_Invalid_Http_Response_Code_Exception $e) {
     exit($e->getMessage());
 }
 
@@ -141,14 +140,14 @@ $optionalFields = array('title' => 'My awesome playlist');
 
 try {
     $playlist = $soundcloud->updatePlaylist($playlistId, $trackIds, $optionalFields);
-} catch (\Soundcloud\Exception\InvalidHttpResponseCodeException $e) {
+} catch (Services_Soundcloud_Invalid_Http_Response_Code_Exception $e) {
     exit($e->getMessage());
 }
 ```
 
 ## Feedback and questions
 
-Found a bug or missing a feature? Don't hesitate to create a new issue here on GitHub. Or contact me [directly](https://github.com/mptre).
+Found a bug or missing a feature? Don't hesitate to create a new issue here on GitHub.
 
 Also make sure to check out the official [documentation](https://github.com/soundcloud/api/wiki/) and the join [Google Group](https://groups.google.com/group/soundcloudapi?pli=1) in order to stay updated.
 
