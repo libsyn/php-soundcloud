@@ -672,7 +672,9 @@ class Service
      */
     public function download($trackId, $params = array(), $curlOptions = array())
     {
-        $lastResponseFormat = array_pop(explode('/', $this->getResponseFormat()));
+        $formatParts = explode('/', $this->getResponseFormat());
+        $lastResponseFormat = array_pop($formatParts);
+
         $defaultParams = array('oauth_token' => $this->getAccessToken());
         $defaultCurlOptions = array(
             CURLOPT_FOLLOWLOCATION => true,
