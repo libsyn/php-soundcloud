@@ -780,7 +780,7 @@ class Service
             $url .= (!preg_match('/connect/', $path)) ? 'api.' : '';
             $url .= ($this->_development) ? self::$_domains['development'] : self::$_domains['production'];
             $url .= '/';
-            $url .= ($includeVersion) ? 'v' . self::$_apiVersion . '/' : '';
+        //    $url .= ($includeVersion) ? 'v' . self::$_apiVersion . '/' : '';
             $url .= $path;
         }
 
